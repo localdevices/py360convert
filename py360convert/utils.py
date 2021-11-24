@@ -2,12 +2,12 @@ import numpy as np
 from scipy.ndimage import map_coordinates
 
 
-def xyzcube(face_w):
+def xyzcube(face_w, overlap=0.):
     '''
     Return the xyz cordinates of the unit cube in [F R B L U D] format.
     '''
     out = np.zeros((face_w, face_w * 6, 3), np.float32)
-    rng = np.linspace(-0.5, 0.5, num=face_w, dtype=np.float32)
+    rng = np.linspace(-0.5 - overlap, 0.5 + overlap, num=face_w, dtype=np.float32)
     grid = np.stack(np.meshgrid(rng, -rng), -1)
 
     # Front face (z = 0.5)
