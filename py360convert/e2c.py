@@ -3,7 +3,7 @@ import numpy as np
 from . import utils
 
 
-def e2c(e_img, face_w=256, mode='bilinear', cube_format='dice'):
+def e2c(e_img, face_w=256, mode='bilinear', cube_format='dice', overlap=0.):
     '''
     e_img:  ndarray in shape of [H, W, *]
     face_w: int, the length of each face of the cubemap
@@ -17,7 +17,7 @@ def e2c(e_img, face_w=256, mode='bilinear', cube_format='dice'):
     else:
         raise NotImplementedError('unknown mode')
 
-    xyz = utils.xyzcube(face_w)
+    xyz = utils.xyzcube(face_w, overlap=overlap)
     uv = utils.xyz2uv(xyz)
     coor_xy = utils.uv2coor(uv, h, w)
 
